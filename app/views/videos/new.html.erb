@@ -1,4 +1,5 @@
 <%= form_with model: @video, local: true do |f| %>
+  <%= render 'shared/error_messages', model: f.object %>
   <p>動画のタイトル</p><%= f.text_field :title %> <br>
   <p>動画の説明</p><%= f.text_area :explanation %> <br>
   <p>都道府県</p><%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"select-box", id:"video-prefecture"}) %> <br>
