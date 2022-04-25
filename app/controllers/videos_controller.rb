@@ -4,7 +4,8 @@ class VideosController < ApplicationController
   end
 
   def create
-    @video = Video.create(video_params)
+    @video = Video.new(video_params)
+    render :new unless @video.save
   end
 
   private

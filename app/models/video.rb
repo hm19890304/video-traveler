@@ -13,4 +13,16 @@ class Video < ApplicationRecord
     validates :title
     validates :explanation
   end
+
+  validates :movie, attached: true
+  validate :movie_size
+
+  private
+
+  def movie_size
+    if movie.attached? && movie.blob.byte_size > 5.megabytes
+      errors.add(:movie, "は1つのファイル5MB以内にしてください")
+    end
+  end
+
 end
