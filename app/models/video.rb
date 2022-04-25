@@ -20,8 +20,8 @@ class Video < ApplicationRecord
   private
 
   def movie_size
-    if movie.attached? && movie.blob.byte_size > 5.megabytes
-      errors.add(:movie, "は1つのファイル5MB以内にしてください")
+    if movie.attached? && movie.blob.byte_size > 10.megabytes
+      errors.add(:movie, "は1つのファイル10MB以内にしてください")
     end
   end
 
