@@ -1,10 +1,9 @@
 Welcome to video-traveler
 <%= link_to "動画を投稿する", new_video_path %>
 <% @video.each do |video| %>
-  <p>動画のタイトル：
-  <a href="/videos/<%= video.id %>">
-    <%= video.title %></p>
-  </a>
+  <p>動画のタイトル：<%= video.title %>
+  <%= link_to '詳細', video_path(video.id), method: :get %>  
+  </p>
   <p>動画の説明：<%= video.explanation %></p>
   <p>都道府県：<%= video.prefecture.name %></p>
   <p>その他住所：<%= video.address %></p>
