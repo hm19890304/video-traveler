@@ -1,6 +1,6 @@
 class VideosController < ApplicationController
   def index
-    @video = Video.all.order(id: 'DESC')
+    @video = Video.all.order('created_at DESC')
   end
 
   def new
@@ -14,6 +14,20 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find(params[:id])    
+  end
+
+  def edit
+    @video = Video.find(params[:id])
+  end
+
+  def update
+    video = Video.find(params[:id])
+    if video.update(video_params)
+      redirect_to video_path(video.id)
+    else
+      @video = Video.find(params[:id])
+      render :edit
+    end
   end
 
   private
