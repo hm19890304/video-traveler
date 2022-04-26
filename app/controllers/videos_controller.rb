@@ -1,4 +1,6 @@
 class VideosController < ApplicationController
+  before_action :set_video, only: [:show, :edit, :update, :destroy]
+
   def index
     @video = Video.all.order('created_at DESC')
   end
@@ -13,26 +15,21 @@ class VideosController < ApplicationController
   end
 
   def show
-    @video = Video.find(params[:id])    
   end
 
   def edit
-    @video = Video.find(params[:id])
   end
 
   def update
-    video = Video.find(params[:id])
-    if video.update(video_params)
-      redirect_to video_path(video.id)
+    if @video.update(video_params)
+      redirect_to video_path(@video.id)
     else
-      @video = Video.find(params[:id])
       render :edit
     end
   end
 
   def destroy
-    video = Video.find(params[:id])
-    video.destroy
+    @video.destroy
     redirect_to root_path
   end
 
@@ -40,5 +37,9 @@ class VideosController < ApplicationController
 
   def video_params
     params.require(:video).permit(:title, :explanation, :prefecture_id, :address, :category_id, :movie)
+  end
+
+  def set_video
+    @video = Video.find(params[:id])
   end
 end
