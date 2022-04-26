@@ -4,7 +4,7 @@ class Video < ApplicationRecord
   belongs_to :category
   has_one_attached :movie
 
-  with_options numericality: { other_than: 1, message: "を入力してください" } do
+  with_options numericality: { other_than: 1, message: 'を入力してください' } do
     validates :category_id
     validates :prefecture_id
   end
@@ -20,9 +20,6 @@ class Video < ApplicationRecord
   private
 
   def movie_size
-    if movie.attached? && movie.blob.byte_size > 10.megabytes
-      errors.add(:movie, "は1つのファイル10MB以内にしてください")
-    end
+    errors.add(:movie, 'は1つのファイル10MB以内にしてください') if movie.attached? && movie.blob.byte_size > 10.megabytes
   end
-
 end

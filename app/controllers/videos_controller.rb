@@ -1,6 +1,6 @@
 class VideosController < ApplicationController
   def index
-    @video = Video.all.order(id: "DESC")
+    @video = Video.all.order(id: 'DESC')
   end
 
   def new
@@ -17,5 +17,4 @@ class VideosController < ApplicationController
   def video_params
     params.require(:video).permit(:title, :explanation, :prefecture_id, :address, :category_id, :movie)
   end
-
 end
