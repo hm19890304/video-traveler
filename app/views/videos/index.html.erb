@@ -1,2 +1,12 @@
 Welcome to video-traveler
 <%= link_to "動画を投稿する", new_video_path %>
+<% @video.each do |video| %>
+  <p>動画のタイトル：<%= video.title %></p>
+  <p>動画の説明：<%= video.explanation %></p>
+  <p>都道府県：<%= video.prefecture.name %></p>
+  <p>その他住所：<%= video.address %></p>
+  <p>カテゴリ：<%= video.category.name %></p>
+  <video controls autoplay muted src="<%= rails_blob_path(video.movie) %>" type="video/mp4">
+  <p>ブラウザに対応していないため、動画を再生できません。</p>
+  </video>
+<% end %>

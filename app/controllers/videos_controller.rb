@@ -1,4 +1,8 @@
 class VideosController < ApplicationController
+  def index
+    @video = Video.all.order(id: "DESC")
+  end
+
   def new
     @video = Video.new
   end
