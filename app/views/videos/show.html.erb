@@ -1,4 +1,5 @@
 <%= link_to '編集', edit_video_path(@video.id), method: :get %>
+<%= link_to '削除', video_path(@video.id), method: :delete %>
 <p>動画のタイトル：<%= @video.title %></p>
 <p>動画の説明：<%= @video.explanation %></p>
 <p>都道府県：<%= @video.prefecture.name %></p>
