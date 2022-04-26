@@ -12,6 +12,10 @@ class VideosController < ApplicationController
     render :new unless @video.save
   end
 
+  def show
+    @video = Video.find(params[:id])    
+  end
+
   private
 
   def video_params
