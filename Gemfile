@@ -56,3 +56,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'pry-rails'
 gem 'active_hash'
 gem 'active_storage_validations'
+gem 'bootstrap', '~> 4.3.1'
+gem 'jquery-rails'
