@@ -15,5 +15,9 @@ require("jquery")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-import 'bootstrap'
-import 'stylesheets/application.scss'
+import "../stylesheets/application"
+import jquery from "jquery"
+window.$ = window.jQuery = jquery
+import * as bootstrap from "bootstrap"
+window.bootstrap = bootstrap
+import "../stylesheets/application"
