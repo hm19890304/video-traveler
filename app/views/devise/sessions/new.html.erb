@@ -7,9 +7,6 @@
         <%= f.text_field :name, autofocus: true%>
       </div>
 
-    <label>都道府県</label>
-    <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"form-control col-4", id:"video-prefecture"}) %> <br>
-
       <div class="field">
         <%= f.label :password %><br />
         <%= f.password_field :password, autocomplete: "off" %>
