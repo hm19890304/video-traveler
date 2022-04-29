@@ -1,11 +1,13 @@
 @import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap');
 
 * {
+  font-family: 'RocknRoll One', sans-serif;
   box-sizing: border-box;
 }
 
 a {
-  text-decoration:none; 
+  text-decoration:none;
 }
 
 video {

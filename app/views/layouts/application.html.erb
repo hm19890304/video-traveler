@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>VideoTraveler</title>
+    <title>旅行はええぞお</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css">
@@ -10,30 +10,21 @@
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <div class="header__bar row">
-          <h1 class="grid-6"><a href="/">VideoTraveler</a></h1>
-            <% if user_signed_in? %>
-              <div class="user_nav grid-6">
-                <span><%= current_user.name %>
-                  <ul class="user__info">
-                    <li>
-                      <%= link_to "マイページ", '#' %>
-                      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-                    </li>
-                  </ul>
-                </span>
-              </div>
-            <% else %>
-              <div class="grid-6">
-                <%= link_to "ログイン", new_user_session_path, class: "post" %>
-                <%= link_to "新規登録", new_user_registration_path, class: "post" %>
-              </div>
-            <% end %>
-        </div>
-      </header>
+    <header class="header d-flex flex-column flex-md-row align-items-center justify-content-between p-3 px-md-4 md-3 bg-white border-bottom shadow-sm">
+        <h2 class="my-0 mr-md-auto font-weight-normal"><a href="/">旅行はええぞお</a></h2>
+          <% if user_signed_in? %>
+            <nav class="my-2 my-md-0 mr-md-3">
+              <span class="fs-5"><%= current_user.name %></span>
+              <%= link_to "マイページ", '#', class: "btn btn-primary" %>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-warning" %>
+            </nav>
+          <% else %>
+            <nav class="my-2 my-md-0 mr-md-3">
+              <%= link_to "ログイン", new_user_session_path, class: "btn btn-primary" %>
+              <%= link_to "新規登録", new_user_registration_path, class: "btn btn-warning" %>
+            </nav>
+          <% end %>
+    </header>
     <%= yield %>
-    </div>
   </body>
 </html>

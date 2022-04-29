@@ -1,6 +1,8 @@
+<%= image_tag 'background-photo.jpeg', width: '100%', height: '60%', alt: '背景画像' %>
+<div class="container">
 <%= link_to "動画を投稿する", new_video_path, class: "btn btn-success" %>
 <% @video.each do |video| %>
-  <div class="border col-12 py-3 ">
+  <div class="border shadow-sm col-12 p-3 ">
     <p>動画のタイトル：<%= video.title %>
     <%= link_to '詳細', video_path(video.id), method: :get, class: "btn btn-primary" %>  
     </p>
@@ -13,3 +15,4 @@
     </video>
   </div>
 <% end %>
+</div>
