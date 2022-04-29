@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>VideoTraveler</title>
+    <title>旅行はええぞお</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css">
@@ -10,21 +10,21 @@
   </head>
 
   <body>
-      <header class="header d-flex flex-column flex-md-row align-items-center p-3 px-md-4 md-3 bg-whiteborder-bottom shadow-sm">
-          <h2 class="my-0 mr-md-auto font-weight-normal"><a href="/">VideoTraveler</a></h2>
-            <% if user_signed_in? %>
-              <nav class="my-2 my-md-0 mr-md-3">
-                <%= current_user.name %>
-                <%= link_to "マイページ", '#' %>
-                <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-              </nav>
-            <% else %>
-              <nav class="my-2 my-md-0 mr-md-3">
-                <%= link_to "ログイン", new_user_session_path, class: "post" %>
-                <%= link_to "新規登録", new_user_registration_path, class: "post" %>
-              </nav>
-            <% end %>
-      </header>
+    <header class="header d-flex flex-column flex-md-row align-items-center justify-content-between p-3 px-md-4 md-3 bg-white border-bottom shadow-sm">
+        <h2 class="my-0 mr-md-auto font-weight-normal"><a href="/">旅行はええぞお</a></h2>
+          <% if user_signed_in? %>
+            <nav class="my-2 my-md-0 mr-md-3">
+              <span class="fs-5"><%= current_user.name %></span>
+              <%= link_to "マイページ", '#', class: "btn btn-primary" %>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-warning" %>
+            </nav>
+          <% else %>
+            <nav class="my-2 my-md-0 mr-md-3">
+              <%= link_to "ログイン", new_user_session_path, class: "btn btn-primary" %>
+              <%= link_to "新規登録", new_user_registration_path, class: "btn btn-warning" %>
+            </nav>
+          <% end %>
+    </header>
     <%= yield %>
   </body>
 </html>
