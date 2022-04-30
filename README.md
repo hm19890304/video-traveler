@@ -1,56 +1,67 @@
-# テーブル設計
+# アプリケーション名
+旅行はええぞお
 
-## users テーブル
+# アプリケーション概要
+旅行先で撮影した動画を投稿することができる。
+投稿された動画は都道府県やカテゴリで検索でき、
+旅行先を決める際の参考にしたり、旅行気分を味わうことができる。
 
-| Column             | Type    | Options     |
-| ------------------ | ------- | ----------- |
-| name               | string  | null: false |
-| prefecture_id      | integer | null: false |
-| encrypted_password | string  | null: false |
+# URL
+https://video-traveler.herokuapp.com/
 
-### Association
+# テスト用アカウント
+- Basic認証ID：admin
+- Basic認証パスワード：0304
+- ニックネーム：ウド
+- パスワード：suzuki
 
-- has_many :videos
-- has_many :videos, through: :favorites
-- has_many :comments
+# 利用方法
+## 動画投稿
+1. トップページ（一覧ページ）のヘッダーからユーザー新規登録を行う
+1. 「投稿する」ボタンから、動画の情報（タイトル・説明・都道府県・その他住所・カテゴリ・動画）を入力し投稿する
 
-## videos テーブル
+## 動画視聴
+1. トップページの動画一覧から気になる動画を視聴する
+1. 視聴したい動画の都道府県やカテゴリがあれば検索機能を利用する
+1. 気になる動画があればお気に入り機能やコメント機能を利用する
 
-| Column             | Type    | Options     |
-| ------------------ | ------- | ----------- |
-| title              | string  | null: false |
-| explanation        | text    | null: false |
-| prefecture_id      | integer | null: false |
-| address            | string  |             |
-| category_id        | integer | null: false |
+# アプリケーションを作成した背景
+旅行好きの妻にヒアリングし、「旅行先を検討する際に映像情報があると良い判断材料になる」という話を聞いた。観光地側で映像を用意している場合はあるが、旅行者が撮影する映像の方がより実体験に近いと考え、動画投稿型のSNSアプリケーションを作成した。
 
-### Association
+# 洗い出した要件
+[要件を定義したシート](https://docs.google.com/spreadsheets/d/1IDhOHbDoQL_TVnLIxt-1yRnoRzxlKp6xbqErpevKTNo/edit?usp=sharing)
 
-- belongs_to :users
-- has_many :users, through: :favorites
-- has_many :comments
+# 実装した機能についての画像および説明
+- 動画投稿画面で動画の情報を入力し投稿する
+[![Image from Gyazo](https://i.gyazo.com/d8537e222614734eb593e2dec2281c45.png)](https://gyazo.com/d8537e222614734eb593e2dec2281c45)
 
-## favorites テーブル
+- トップページの動画一覧から気になる動画を視聴する
+[![Image from Gyazo](https://i.gyazo.com/1a42b9d28abd51cca4e80644b64be4d5.jpg)](https://gyazo.com/1a42b9d28abd51cca4e80644b64be4d5)
 
-| Column   | Type       | Options                        |
-| -------- | ---------- | ------------------------------ |
-| user_id  | references | null: false, foreign_key: true |
-| video_id | references | null: false, foreign_key: true |
+# 実装予定の機能
+検索機能、コメント機能、お気に入り機能を実装予定。
 
-### Association
+# データベース設計
+[![Image from Gyazo](https://i.gyazo.com/045eb1a534d67cf3e419b1be8a91fb8b.png)](https://gyazo.com/045eb1a534d67cf3e419b1be8a91fb8b)
 
-- belongs_to :user
-- belongs_to :video
+# 画面遷移図
+[![Image from Gyazo](https://i.gyazo.com/4dc1bcc67961a8d7a7ecdad1b2bfce4d.png)](https://gyazo.com/4dc1bcc67961a8d7a7ecdad1b2bfce4d)
 
-## comments テーブル
+# 開発環境
+- フロントエンド
+- バックエンド
+- インフラ
+- テスト
+- テキストエディタ
+- タスク管理
 
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| text    | string     | null: false                    |
-| user    | references | null: false, foreign_key: true |
-| video   | references | null: false, foreign_key: true |
+# ローカルでの動作方法
+以下のコマンドを順に実行。
+% git clone https://github.com/hm19890304/video-traveler
+% cd video-traveler
+% bundle install
+% yarn install
 
-### Association
-
-- belongs_to :user
-- belongs_to :video
+# 工夫したポイント
+ユーザー新規登録およびログイン時にメールアドレスを入力させないようにしたことです。
+ユーザーが行う入力内容をシンプルなものにして、気軽に投稿できるアプリを目指しました。
