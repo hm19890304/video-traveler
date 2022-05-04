@@ -5,20 +5,20 @@
     <%= form_with model: @video, local: true do |f| %>
       <%= render 'shared/error_messages', model: f.object %>
       <label>動画のタイトル <span class="badge bg-danger">必須</span></label>
-      <%= f.text_field :title, class: "form-control my-md-1" %> <br>
+      <%= f.text_field :title, class: "form-control my-md-1", placeholder: "公開する動画にタイトルをつけて下さい。例）富士山の山頂" %> <br>
       <label>動画の説明 <span class="badge bg-danger">必須</span></label>
-      <%= f.text_area :explanation, class: "form-control my-md-1" %> <br>
+      <%= f.text_area :explanation, class: "form-control my-md-1", placeholder: "公開する動画の説明文を書いて下さい。例）去年の夏、富士山に登ったときに撮影しました。" %> <br>
       <label>都道府県 <span class="badge bg-danger">必須</span></label>
       <div class="col-3">
       <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"form-control my-md-1", id:"video-prefecture"}) %> <br>
       </div>
       <label>その他住所</label>
-      <%= f.text_field :address, class: "form-control my-md-1" %> <br>
+      <%= f.text_field :address, class: "form-control my-md-1", placeholder: "任意で都道府県以外の住所を書いて下さい。例）富士山" %> <br>
       <label>カテゴリ <span class="badge bg-danger">必須</span></label>
       <div class="col-5">
       <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"form-control col-6 my-md-1", id:"video-category"}) %> <br>
       </div>
-      <p>動画 <span class="badge bg-danger">必須</span></p>
+      <p>動画 ※拡張子:mp4、サイズ:10MB以下<span class="badge bg-danger">必須</span></p>
       <%= f.file_field :movie %> <br><br>
       <%= f.submit '投稿する', class: "btn btn-primary" %>
     <% end %>
