@@ -7,6 +7,7 @@
   <p>都道府県：<%= @video.prefecture.name %></p>
   <p>その他住所：<%= @video.address %></p>
   <p>カテゴリ：<%= @video.category.name %></p>
+  <p>投稿者：<%= @video.user.name %></p>
   <p>更新日：<%= @video.updated_at.strftime("%Y-%m-%d") %></p>
   <video controls autoplay muted src="<%= rails_blob_path(@video.movie) %>" type="video/mp4">
   <p>ブラウザに対応していないため、動画を再生できません。</p>
