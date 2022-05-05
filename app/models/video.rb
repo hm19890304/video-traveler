@@ -2,6 +2,7 @@ class Video < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :prefecture
   belongs_to :category
+  belongs_to :user
   has_one_attached :movie
 
   with_options numericality: { other_than: 1, message: 'を入力してください' } do
