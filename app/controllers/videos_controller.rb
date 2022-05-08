@@ -37,7 +37,8 @@ class VideosController < ApplicationController
   private
 
   def video_params
-    params.require(:video).permit(:title, :explanation, :prefecture_id, :address, :category_id, :movie).merge(user_id: current_user.id)
+    params.require(:video).permit(:title, :explanation, :prefecture_id, :address, :category_id,
+                                  :movie).merge(user_id: current_user.id)
   end
 
   def set_video
