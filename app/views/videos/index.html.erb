@@ -15,21 +15,26 @@
       <div class="row justify-content-center h2">
         - 最新の投稿 -
       </div>
-      <% @video.each do |video| %>
-        <div class="border shadow-sm p-3">
-          <p>動画のタイトル：<%= video.title %>
-          <%= link_to '詳細', video_path(video.id), method: :get, class: "btn btn-primary" %>  
-          </p>
-          <p>動画の説明：<%= video.explanation %></p>
-          <p>都道府県：<%= video.prefecture.name %></p>
-          <p>その他住所：<%= video.address %></p>
-          <p>カテゴリ：<%= video.category.name %></p>
-          <p>投稿者：<%= video.user.name %></p>
-          <video controls autoplay muted src="<%= rails_blob_path(video.movie) %>" type="video/mp4" width="50%">
-          <p>ブラウザに対応していないため、動画を再生できません。</p>
-          </video>
-        </div>
-      <% end %>
+      <div class="row justify-content-center">
+        <% count = 0 %>
+        <% @video.each do |video| %>
+        <% break if count >= 4 %>
+        <% count += 1 %>
+        <%# 最新の投稿は新しい順に4件まで表示 %>
+          <div class="col-6 border shadow-sm p-3 justify-content-center">
+            <p>動画のタイトル：<%= video.title %>
+            <%= link_to '動画詳細', video_path(video.id), method: :get, class: "btn btn-primary" %></p>
+            <p>動画の説明：<%= video.explanation %></p>
+            <p>都道府県：<%= video.prefecture.name %></p>
+            <p>その他住所：<%= video.address %></p>
+            <p>カテゴリ：<%= video.category.name %></p>
+            <p>投稿者：<%= video.user.name %></p>
+            <video controls autoplay muted src="<%= rails_blob_path(video.movie) %>" type="video/mp4">
+              <p>ブラウザに対応していないため、動画を再生できません。</p>
+            </video>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
