@@ -20,7 +20,7 @@ class Video < ApplicationRecord
 
   def self.search(search)
     if search != ""
-      Video.where('title LIKE(?)', "%#{search}%")
+      Video.where(['title LIKE(?) OR explanation LIKE(?) OR address LIKE(?)', "%#{search}%", "%#{search}%", "%#{search}%"]).order('created_at DESC')
     else
       Video.all.order('created_at DESC')
     end
