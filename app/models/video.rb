@@ -18,6 +18,14 @@ class Video < ApplicationRecord
   validates :movie, attached: true
   validate :movie_size
 
+  def self.search(search)
+    if search != ""
+      Video.where('title LIKE(?)', "%#{search}%")
+    else
+      Video.all.order('created_at DESC')
+    end
+  end
+
   private
 
   def movie_size

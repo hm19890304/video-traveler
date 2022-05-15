@@ -1,0 +1,28 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-11">
+      <% if user_signed_in? %>
+        <%= link_to "動画を投稿する！", new_video_path, class: "btn btn-success btn-lg post-btn" %>
+      <% end %>
+      <div class="row justify-content-center h2">
+        - 検索結果 -
+      </div>
+      <div class="row justify-content-center">
+        <% @video.each do |video| %>
+          <div class="col-6 border shadow-sm p-3 justify-content-center">
+            <p>動画のタイトル：<%= video.title %>
+            <%= link_to '動画詳細', video_path(video.id), method: :get, class: "btn btn-primary" %></p>
+            <p>動画の説明：<%= video.explanation %></p>
+            <p>都道府県：<%= video.prefecture.name %></p>
+            <p>その他住所：<%= video.address %></p>
+            <p>カテゴリ：<%= video.category.name %></p>
+            <p>投稿者：<%= video.user.name %></p>
+            <video controls autoplay muted src="<%= rails_blob_path(video.movie) %>" type="video/mp4">
+              <p>ブラウザに対応していないため、動画を再生できません。</p>
+            </video>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
