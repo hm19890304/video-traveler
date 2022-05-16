@@ -37,7 +37,7 @@ class VideosController < ApplicationController
   end
 
   def search
-    @video = Video.search([params[:prefecture_id],params[:keyword]])
+    @video = Video.search([params[:prefecture_id],params[:category_id],params[:keyword]])
   end
 
   private

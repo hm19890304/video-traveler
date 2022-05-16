@@ -14,6 +14,7 @@
         <h2 class="my-0 mr-md-auto font-weight-normal"><a href="/">旅行はええぞお</a></h2>
         <%= form_with(url: search_videos_path, local: true, method: :get) do |f| %>
           <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {selected: params[:prefecture_id]}, {}) %>
+          <%= f.collection_select(:category_id, Category.all, :id, :name, {selected: params[:category_id]}, {}) %>
           <%= f.text_field :keyword, placeholder: "検索する投稿のキーワード", value: params[:keyword] %>
           <%= f.submit "検索", class: "btn btn-info btn-sm" %>
         <% end %>
