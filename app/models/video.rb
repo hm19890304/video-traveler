@@ -18,6 +18,31 @@ class Video < ApplicationRecord
   validates :movie, attached: true
   validate :movie_size
 
+  def self.search(search)
+    if search[0] == "1" && search[1] == "1" && search[2] == ""
+      Video.all.order('created_at DESC')
+    elsif search[0] == "1" && search[1] == "1"
+      Video.where(['title LIKE(?) OR explanation LIKE(?) OR address LIKE(?)', "%#{search[2]}%", "%#{search[2]}%", "%#{search[2]}%"]).order('created_at DESC')
+    elsif search[0] == "1" && search[2] == ""
+      Video.where(['category_id LIKE(?)', "#{search[1]}"]).order('created_at DESC')
+    elsif search[1] == "1" && search[2] == ""
+      Video.where(['prefecture_id LIKE(?)', "#{search[0]}"]).order('created_at DESC')
+    elsif search[0] == "1"
+      search_video = Video.where(['title LIKE(?) OR explanation LIKE(?) OR address LIKE(?)', "%#{search[2]}%", "%#{search[2]}%", "%#{search[2]}%"]).order('created_at DESC')
+      search_video = search_video.where(['category_id LIKE(?)', "#{search[1]}"]).order('created_at DESC')
+    elsif search[1] == "1"
+      search_video = Video.where(['title LIKE(?) OR explanation LIKE(?) OR address LIKE(?)', "%#{search[2]}%", "%#{search[2]}%", "%#{search[2]}%"]).order('created_at DESC')
+      search_video = search_video.where(['prefecture_id LIKE(?)', "#{search[0]}"]).order('created_at DESC')
+    elsif search[2] == ""
+      search_video = Video.where(['prefecture_id LIKE(?)', "#{search[0]}"]).order('created_at DESC')
+      search_video = search_video.where(['category_id LIKE(?)', "#{search[1]}"]).order('created_at DESC')
+    else
+      search_video = Video.where(['title LIKE(?) OR explanation LIKE(?) OR address LIKE(?)', "%#{search[2]}%", "%#{search[2]}%", "%#{search[2]}%"]).order('created_at DESC')
+      search_video = search_video.where(['prefecture_id LIKE(?)', "#{search[0]}"]).order('created_at DESC')
+      search_video = search_video.where(['category_id LIKE(?)', "#{search[1]}"]).order('created_at DESC')
+    end
+  end
+
   private
 
   def movie_size

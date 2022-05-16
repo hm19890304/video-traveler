@@ -1,6 +1,8 @@
 class VideosController < ApplicationController
+  before_action :authenticate_user!, only: [:new]
   before_action :set_video, only: [:show, :edit, :update, :destroy]
-  before_action :move_to_index, except: [:index, :show]
+  before_action :move_to_index, except: [:index, :show, :search]
+  
 
   def index
     @video = Video.all.order('created_at DESC')
@@ -32,6 +34,10 @@ class VideosController < ApplicationController
   def destroy
     @video.destroy
     redirect_to root_path
+  end
+
+  def search
+    @video = Video.search([params[:prefecture_id],params[:category_id],params[:keyword]])
   end
 
   private
