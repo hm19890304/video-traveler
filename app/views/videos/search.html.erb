@@ -9,7 +9,11 @@
       </div>
       <div class="row justify-content-center">
         <% if @video.present? %>
+          <% count = 0 %>
           <% @video.each do |video| %>
+            <% break if count >= 4 %>
+            <% count += 1 %>
+            <%# 最新の投稿は新しい順に4件まで表示 %>
             <div class="col-6 border shadow-sm p-3 justify-content-center">
               <p>動画のタイトル：<%= video.title %>
               <%= link_to '動画詳細', video_path(video.id), method: :get, class: "btn btn-primary" %></p>

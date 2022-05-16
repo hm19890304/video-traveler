@@ -19,10 +19,15 @@ class Video < ApplicationRecord
   validate :movie_size
 
   def self.search(search)
-    if search != ""
-      Video.where(['title LIKE(?) OR explanation LIKE(?) OR address LIKE(?)', "%#{search}%", "%#{search}%", "%#{search}%"]).order('created_at DESC')
-    else
+    if search[0] == "1" && search[1] == ""
       Video.all.order('created_at DESC')
+    elsif search[0] == "1"
+      Video.where(['title LIKE(?) OR explanation LIKE(?) OR address LIKE(?)', "%#{search[1]}%", "%#{search[1]}%", "%#{search[1]}%"]).order('created_at DESC')
+    elsif search[1] == ""
+      search_video = Video.where(['prefecture_id LIKE(?)', "#{search[0]}"]).order('created_at DESC')
+    else
+      search_video = Video.where(['title LIKE(?) OR explanation LIKE(?) OR address LIKE(?)', "%#{search[1]}%", "%#{search[1]}%", "%#{search[1]}%"]).order('created_at DESC')
+      search_video = search_video.where(['prefecture_id LIKE(?)', "#{search[0]}"]).order('created_at DESC')
     end
   end
 
