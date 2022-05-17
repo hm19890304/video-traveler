@@ -21,7 +21,7 @@
           <% if user_signed_in? %>
             <nav class="my-2 my-md-0 mr-md-3">
               <span class="fs-5"><%= current_user.name %></span>
-              <%= link_to "マイページ", '#', class: "btn btn-primary" %>
+              <%= link_to "マイページ", user_path(current_user.id), class: "btn btn-primary" %>
               <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-warning" %>
             </nav>
           <% else %>
