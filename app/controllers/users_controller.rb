@@ -3,6 +3,9 @@ class UsersController < ApplicationController
   before_action :set_videos, only: [:show]
 
   def show
+#    @user = User.find(params[:id])
+    @favorites = @user.favorites
+    @favorite_videos = @user.favorite_videos    
   end
 
   private

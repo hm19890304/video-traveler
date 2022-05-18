@@ -4,6 +4,9 @@
       <% if user_signed_in? %>
         <%= link_to "動画を投稿する！", new_video_path, class: "btn btn-success btn-lg post-btn" %>
       <% end %>
+      <div class="row justify-content-center">
+        <%= link_to 'お気に入り動画一覧', video_favorites_path(@user.id), method: :get, class: "btn btn-primary col-2 m-2" %>
+      </div>
       <div class="row justify-content-center h2">
         - <%= @user.name %>さんの投稿 -
       </div>
@@ -12,7 +15,13 @@
           <% @video.each do |video| %>
             <div class="col-6 border shadow-sm p-3 justify-content-center">
               <p>動画のタイトル：<%= video.title %>
-              <%= link_to '動画詳細', video_path(video.id), method: :get, class: "btn btn-primary" %></p>
+              <%= link_to '動画詳細', video_path(video.id), method: :get, class: "btn btn-primary btn-sm" %>
+              <% if video.already_favorited?(current_user) %>
+                <%= link_to 'お気に入り解除', video_favorites_path(video.id), method: :delete, class: "btn btn-danger btn-sm" %></p>
+              <% else %>
+                <%= link_to 'お気に入り登録', video_favorites_path(video.id), method: :post, class: "btn btn-warning btn-sm" %></p>
+              <% end %>
+              </p>
               <p>動画の説明：<%= video.explanation %></p>
               <p>都道府県：<%= video.prefecture.name %></p>
               <p>その他住所：<%= video.address %></p>
