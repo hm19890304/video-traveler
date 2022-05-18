@@ -4,6 +4,7 @@ class Video < ApplicationRecord
   belongs_to :category
   belongs_to :user
   has_one_attached :movie
+  has_many :favorites
 
   with_options numericality: { other_than: 1, message: 'を入力してください' } do
     validates :category_id
@@ -46,6 +47,11 @@ class Video < ApplicationRecord
       search_video = search_video.where(['category_id LIKE(?)', (search[1]).to_s]).order('created_at DESC')
     end
   end
+
+  def already_favorited?(user)
+    favorites.where(user_id: user.id).exists?
+  end
+
 
   private
 

@@ -1,0 +1,40 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-11">
+      <% if user_signed_in? %>
+        <%= link_to "動画を投稿する！", new_video_path, class: "btn btn-success btn-lg post-btn" %>
+      <% end %>
+      <div class="row justify-content-center h2">
+        - お気に入り動画一覧 -
+      </div>
+      <div class="row justify-content-center">
+        <% if @favorite.present? %>
+          <% @favorite.each do |favorite| %>
+            <div class="col-6 border shadow-sm p-3 justify-content-center">
+              <p>動画のタイトル：<%= favorite.video.title %>
+              <%= link_to '動画詳細', video_path(favorite.video.id), method: :get, class: "btn btn-primary btn-sm" %>
+              <% if favorite.video.already_favorited?(current_user) %>
+                <%= link_to 'お気に入り解除', video_favorites_path(favorite.video.id), method: :delete, class: "btn btn-danger btn-sm" %></p>
+              <% else %>
+                <%= link_to 'お気に入り登録', video_favorites_path(favorite.video.id), method: :post, class: "btn btn-warning btn-sm" %></p>
+              <% end %>
+              </p>
+              <p>動画の説明：<%= favorite.video.explanation %></p>
+              <p>都道府県：<%= favorite.video.prefecture.name %></p>
+              <p>その他住所：<%= favorite.video.address %></p>
+              <p>カテゴリ：<%= favorite.video.category.name %></p>
+              <p>投稿者：<%= favorite.video.user.name %></p>
+              <video controls autoplay muted src="<%= rails_blob_path(favorite.video.movie) %>" type="video/mp4">
+                <p>ブラウザに対応していないため、動画を再生できません。</p>
+              </video>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="row justify-content-center h3">
+            お気に入りした動画はありません。
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

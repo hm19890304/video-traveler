@@ -4,6 +4,11 @@
     <%= link_to '編集', edit_video_path(@video.id), method: :get, class: "btn btn-primary" %>
     <%= link_to '削除', video_path(@video.id), method: :delete, class: "btn btn-danger" %>
   <% end %>
+  <% if @video.already_favorited?(current_user) %>
+    <%= link_to 'お気に入り解除', video_favorites_path(@video.id), method: :delete, class: "btn btn-danger btn-sm" %></p>
+  <% else %>
+    <%= link_to 'お気に入り登録', video_favorites_path(@video.id), method: :post, class: "btn btn-warning btn-sm" %></p>
+  <% end %>
   <p>動画のタイトル：<%= @video.title %></p>
   <p>動画の説明：<%= @video.explanation %></p>
   <p>都道府県：<%= @video.prefecture.name %></p>
