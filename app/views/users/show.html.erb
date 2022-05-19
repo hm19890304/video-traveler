@@ -4,9 +4,11 @@
       <% if user_signed_in? %>
         <%= link_to "動画を投稿する！", new_video_path, class: "btn btn-success btn-lg post-btn" %>
       <% end %>
-      <div class="row justify-content-center">
-        <%= link_to 'お気に入り動画一覧', video_favorites_path(@user.id), method: :get, class: "btn btn-primary col-2 m-2" %>
-      </div>
+      <% if user_signed_in? && @user.id == current_user.id %>
+        <div class="row justify-content-center">
+          <%= link_to 'お気に入り動画一覧', video_favorites_path(@user.id), method: :get, class: "btn btn-primary col-2 m-2" %>
+        </div>
+      <% end %>
       <div class="row justify-content-center h2">
         - <%= @user.name %>さんの投稿 -
       </div>

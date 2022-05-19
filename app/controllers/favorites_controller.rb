@@ -13,7 +13,7 @@ class FavoritesController < ApplicationController
   end
 
   def show
-    @favorite = Favorite.where(user_id: current_user.id)
+    @favorite = Favorite.where(user_id: current_user.id).order('created_at DESC')
   end
 
 end

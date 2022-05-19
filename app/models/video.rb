@@ -5,6 +5,7 @@ class Video < ApplicationRecord
   belongs_to :user
   has_one_attached :movie
   has_many :favorites
+  has_many :comments, dependent: :destroy
 
   with_options numericality: { other_than: 1, message: 'を入力してください' } do
     validates :category_id

@@ -8,8 +8,9 @@ class User < ApplicationRecord
 
   belongs_to :prefecture
   has_many :videos, dependent: :destroy
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
   has_many :favorite_videos, through: :favorites, source: :video
+  has_many :comments, dependent: :destroy
 
   validates :name, uniqueness: true
 
