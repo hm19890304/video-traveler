@@ -1,23 +1,46 @@
 <div class="container">
-<div class="border shadow-sm col-12 p-3 ">
-  <% if user_signed_in? && current_user.id == @video.user.id %>
-    <%= link_to '編集', edit_video_path(@video.id), method: :get, class: "btn btn-primary" %>
-    <%= link_to '削除', video_path(@video.id), method: :delete, class: "btn btn-danger" %>
-  <% end %>
-  <% if @video.already_favorited?(current_user) %>
-    <%= link_to 'お気に入り解除', video_favorites_path(@video.id), method: :delete, class: "btn btn-danger btn-sm" %></p>
-  <% else %>
-    <%= link_to 'お気に入り登録', video_favorites_path(@video.id), method: :post, class: "btn btn-warning btn-sm" %></p>
-  <% end %>
-  <p>動画のタイトル：<%= @video.title %></p>
-  <p>動画の説明：<%= @video.explanation %></p>
-  <p>都道府県：<%= @video.prefecture.name %></p>
-  <p>その他住所：<%= @video.address %></p>
-  <p>カテゴリ：<%= @video.category.name %></p>
-  <p>投稿者：<%= @video.user.name %></p>
-  <p>更新日：<%= @video.updated_at.strftime("%Y-%m-%d") %></p>
-  <video controls autoplay muted src="<%= rails_blob_path(@video.movie) %>" type="video/mp4">
-  <p>ブラウザに対応していないため、動画を再生できません。</p>
-  </video>
-</div>
+  <div class="border shadow-sm col-12 p-3 ">
+    <% if user_signed_in? && current_user.id == @video.user.id %>
+      <%= link_to '編集', edit_video_path(@video.id), method: :get, class: "btn btn-primary" %>
+      <%= link_to '削除', video_path(@video.id), method: :delete, class: "btn btn-danger" %>
+    <% end %>
+    <% if user_signed_in? %>
+      <% if @video.already_favorited?(current_user) %>
+        <%= link_to 'お気に入り解除', video_favorites_path(@video.id), method: :delete, class: "btn btn-danger btn-sm" %></p>
+      <% else %>
+        <%= link_to 'お気に入り登録', video_favorites_path(@video.id), method: :post, class: "btn btn-warning btn-sm" %></p>
+      <% end %>
+    <% end %>
+    <p>動画のタイトル：<%= @video.title %></p>
+    <p>動画の説明：<%= @video.explanation %></p>
+    <p>都道府県：<%= @video.prefecture.name %></p>
+    <p>その他住所：<%= @video.address %></p>
+    <p>カテゴリ：<%= @video.category.name %></p>
+    <p>投稿者：<%= @video.user.name %></p>
+    <p>更新日：<%= @video.updated_at.strftime("%Y-%m-%d") %></p>
+    <video controls autoplay muted src="<%= rails_blob_path(@video.movie) %>" type="video/mp4">
+      <p>ブラウザに対応していないため、動画を再生できません。</p>
+    </video>
+    <div class="container">
+      <div class="col-6">
+      <% if user_signed_in? %>
+        <%= form_with(model: [@video, @comment], local: true) do |f| %>
+          <%= f.text_area :text, placeholder: "コメントを入力", rows: "2", class: "form-control" %>
+          <%= f.submit "コメントする", class: "btn btn-primary" %>
+        <% end %>
+      <% else %>
+        <strong><p>※※※ コメントの投稿には新規登録/ログインが必要です ※※※</p></strong>
+      <% end %>
+      </div>
+      <div class="comments">
+        <h4>＜コメント一覧＞</h4>
+        <% @comments.each do |comment| %>
+          <p>
+            <strong><%= link_to comment.user.name, user_path(comment.user_id) %>：</strong>
+            <%= comment.text %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

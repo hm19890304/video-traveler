@@ -17,6 +17,8 @@ class VideosController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
+    @comments = @video.comments.includes(:user)
   end
 
   def edit
