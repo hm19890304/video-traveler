@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :favorite_videos, through: :favorites, source: :video
   has_many :comments, dependent: :destroy
 
-  validates :name, uniqueness: true
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
 
   with_options numericality: { other_than: 1, message: 'を入力してください' } do
     validates :prefecture_id
