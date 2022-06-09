@@ -31,26 +31,26 @@ RSpec.describe User, type: :model do
       it 'prefecture_idが1では登録できない' do
         @user.prefecture_id = 1
         @user.valid?
-        expect(@user.errors.full_messages).to include("Prefecture を入力してください")
+        expect(@user.errors.full_messages).to include('Prefecture を入力してください')
       end
       it '重複したnameが存在する場合は登録できない' do
         @user.save
         another_user = FactoryBot.build(:user)
         another_user.name = @user.name
         another_user.valid?
-        expect(another_user.errors.full_messages).to include("Name has already been taken")
+        expect(another_user.errors.full_messages).to include('Name has already been taken')
       end
       it 'passwordが5文字以下では登録できない' do
         @user.password = 'abcd5'
         @user.password_confirmation = @user.password
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
+        expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
       it 'passwordが129文字以上では登録できない' do
         @user.password = Faker::Internet.password(min_length: 129)
         @user.password_confirmation = @user.password
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is too long (maximum is 128 characters)")
+        expect(@user.errors.full_messages).to include('Password is too long (maximum is 128 characters)')
       end
     end
   end

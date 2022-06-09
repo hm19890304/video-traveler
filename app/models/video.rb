@@ -53,7 +53,6 @@ class Video < ApplicationRecord
     favorites.where(user_id: user.id).exists?
   end
 
-
   private
 
   def movie_size

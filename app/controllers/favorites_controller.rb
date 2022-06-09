@@ -1,5 +1,4 @@
 class FavoritesController < ApplicationController
-
   def create
     favorite = current_user.favorites.build(video_id: params[:video_id])
     favorite.save
@@ -15,5 +14,4 @@ class FavoritesController < ApplicationController
   def show
     @favorite = Favorite.where(user_id: current_user.id).order('created_at DESC')
   end
-
 end
