@@ -7,11 +7,13 @@ RSpec.describe "Users", type: :request do
   end
 
   describe "GET #show" do
-    it 'showアクションにリクエストすると正常にレスポンスが返ってくる' do 
+    it 'showアクションにリクエストすると正常にレスポンスが返ってくる' do
+      get user_path(@user.id)
+      expect(response.status).to eq 200
     end
-    it 'showアクションにリクエストするとレスポンスに投稿済みの動画のタイトルが存在する' do 
-    end
-    it 'showアクションにリクエストするとレスポンスにお気に入り動画一覧ボタンが存在する' do 
+    it 'showアクションにリクエストするとレスポンスに「（ユーザー名）さんの投稿」という文字列が存在する' do 
+      get user_path(@user.id)
+      expect(response.body).to include(@user.name + 'さんの投稿')
     end
   end
 end
